@@ -6,6 +6,13 @@ public class Person {
     private String email;
     private String age;
 
+    public Person(String name, String gender, String email, String age) {
+        this.name = name;
+        this.gender = gender;
+        this.email = email;
+        this.age = age;
+    }
+
     public String getName() {
         return name;
     }
@@ -35,5 +42,15 @@ public class Person {
 
     public void setAge(String age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", email='" + email + '\'' +
+                ", age='" + age + '\'' +
+                '}';
     }
 }
