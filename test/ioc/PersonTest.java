@@ -1,6 +1,7 @@
 package ioc;
 
 
+import ioc.bean.AirPlane;
 import ioc.bean.Book;
 import ioc.bean.Car;
 import ioc.bean.Person;
@@ -119,6 +120,17 @@ public class PersonTest {
         Book book = (Book) applicationContext.getBean("book1");
         Book book2 = (Book) applicationContext.getBean("book1");
         System.out.println(book == book2);
+    }
+
+
+    @Test
+    public void test10(){
+        System.out.println("启动容器完成----");
+        AirPlane airPlane = (AirPlane) applicationContext.getBean("airPlane");
+        System.out.println(airPlane);
+
+        AirPlane airPlane2  = (AirPlane) applicationContext.getBean("airPlane2");
+        System.out.println(airPlane2);
     }
 
 }

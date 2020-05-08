@@ -31,8 +31,23 @@ bean之间的依赖，只是改变顺序-->
                 工厂类 工厂对象 = new 工厂类();
                 工厂对象.getAirPlane("zhangsan");
         -->
-    <bean id="airplane" class="ioc.bean.AirPlane">
+    <!--1.静态工厂
+    class="ioc.factory.AirPlaneStaticFactory" 指定静态工厂全类名
+    factory-method="getAirPlane" 指定工厂方法
+    <constructor-arg  value="张三机长">： 为方法传参数-->
+    <bean id = "airPlane" class="ioc.factory.AirPlaneStaticFactory" factory-method="getAirPlane">
+        <constructor-arg  value="张三机长"></constructor-arg>
+    </bean>
 
+    <!--2.实例工厂
+    1. 先配置出实力工厂对象
+    2.配制出我们要创建的airPlane使用哪个工厂创建
+        1）factory-bean="airPlaneInstanceFactory" 指定当前对象创建需要哪个工厂实例
+        2）factory-method="getAirPlane" 指定调用的工厂方法
+    -->
+    <bean id = "airPlaneInstanceFactory" class="ioc.factory.AirPlaneInstanceFactory"  ></bean>
+    <bean id = "airPlane2" class="ioc.bean.AirPlane" factory-bean="airPlaneInstanceFactory" factory-method="getAirPlane">
+        <constructor-arg value="李四机长"></constructor-arg>
     </bean>
 
 </beans>

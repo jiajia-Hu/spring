@@ -11,7 +11,6 @@ public class AirPlaneStaticFactory {
     //静态方法AirPlaneStaticFactory.getAirPlane()
     public static AirPlane getAirPlane(String jzName){
         System.out.println("static AirPlaneStaticFactory 造飞机");
-
         AirPlane airPlane = new AirPlane();
         airPlane.setFdj("太行");
         airPlane.setJzName(jzName);

@@ -47,4 +47,15 @@ public class AirPlane {
     public void setFjzName(String fjzName) {
         this.fjzName = fjzName;
     }
+
+    @Override
+    public String toString() {
+        return "AirPlane{" +
+                "fdj='" + fdj + '\'' +
+                ", yc='" + yc + '\'' +
+                ", personNum=" + personNum +
+                ", jzName='" + jzName + '\'' +
+                ", fjzName='" + fjzName + '\'' +
+                '}';
+    }
 }
