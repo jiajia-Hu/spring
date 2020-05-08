@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--创建3个bean 按照配置顺序
+bean之间的依赖，只是改变顺序-->
+<bean id="car" class="ioc.bean.Car" depends-on="person"></bean>
+<!--<bean id="book" class="ioc.bean.Book"></bean>-->
+<bean id="person" class="ioc.bean.Person"></bean>
+
+    <!--bean 的作用域： bean是否单实例 默认singleton
+    prototype:多实例
+        1.容器启动不会创建bean
+        2.获取的时候创建bean
+        3.每次获取都会创建一个新的对象
+    singleton：单实例
+        1.在容器启动之前就已经创建好对象保存在容器中
+        2. 任何时候获取都是同一个bean
+    request:在web环境下，同一次请求创建一个（不用）
+    session:在web环境下，同一次会话创建一个（不用）
+    -->
+    <bean id="book1" class="ioc.bean.Book" scope="prototype"></bean>
+
+<!--配置通过静态工厂方法创建的bean、 实例工厂方法创建的bean，FactoryBean-->
+<!--bean的创建默认就是框架利用反射new出来的bean实例-->
+    <!--工厂模式：工厂帮我们创建对象，有一个专门创建对象的类，这个类就是工厂-->
+    <!--AirPlane airPlane = AirplaneFactory.getAirPlane(String jzName)
+        静态工厂：工厂本身不用创建对象，都是通过静态方法调用 对象 = 工厂类.工厂方法名();
+        动态工厂：工厂本身需要创建对象
+                工厂类 工厂对象 = new 工厂类();
+                工厂对象.getAirPlane("zhangsan");
+        -->
+    <bean id="airplane" class="ioc.bean.AirPlane">
+
+    </bean>
+
+</beans>

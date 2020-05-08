@@ -1,4 +1,4 @@
-package ioc;
+package ioc.bean;
 
 public class Book {
     private  String name;
@@ -19,6 +19,10 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public Book() {
+        System.out.println("Book无参constructor");
     }
 
     @Override

@@ -1,4 +1,4 @@
-package ioc;
+package ioc.bean;
 
 public class Car {
 
@@ -32,6 +32,9 @@ public class Car {
         this.color = color;
     }
 
+    public Car() {
+        System.out.println("Car无参constructor");
+    }
 
     @Override
     public String toString() {

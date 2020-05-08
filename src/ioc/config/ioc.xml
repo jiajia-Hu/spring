@@ -6,7 +6,7 @@
             http://www.springframework.org/schema/beans/spring-beans.xsd" >
 
         <!-- 通过ioc容器创建对象，并赋值-->
-    <bean id = "person1" class = "ioc.Person">
+    <bean id = "person1" class = "ioc.bean.Person">
         <property name="age" value="20"></property>
         <property name="email" value="267348@q.com"></property>
         <property name="gender" value="男"></property>
@@ -14,7 +14,7 @@
     </bean>
 
     <!--通过对象类型创建-->
-    <bean id = "person2" class = "ioc.Person">
+    <bean id = "person2" class = "ioc.bean.Person">
         <property name="age" value="20"></property>
         <property name="email" value="267348@q.com"></property>
         <property name="gender" value="女"></property>
@@ -22,7 +22,7 @@
     </bean>
 
     <!--public Person(String name, String gender, String email, String age)-->
-    <bean id="person3" class="ioc.Person">
+    <bean id="person3" class="ioc.bean.Person">
         <constructor-arg name="email" value="uyweri@qq.com"></constructor-arg>
         <constructor-arg name="gender" value="男"></constructor-arg>
         <constructor-arg name="age" value="12"></constructor-arg>
@@ -32,7 +32,7 @@
     <!--public Person(String name, String gender, String email, String age)
     省略name属性 但是要按照构造函数的参数顺序 不按顺序就打出来不按顺序
     可以用index 指定参数索引 从0开始  如果构造函数重载 可以用type指定参数类型-->
-    <bean id="person4" class="ioc.Person">
+    <bean id="person4" class="ioc.bean.Person">
         <constructor-arg value="uyweri@qq.com"></constructor-arg>
         <constructor-arg value="男"></constructor-arg>
         <constructor-arg value="12" index="3" type="java.lang.Integer"></constructor-arg>

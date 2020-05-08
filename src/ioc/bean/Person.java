@@ -1,4 +1,4 @@
-package ioc;
+package ioc.bean;
 
 import java.util.List;
 import java.util.Map;
@@ -23,7 +23,6 @@ public class Person {
         this.gender = gender;
         this.email = email;
         this.age = age;
-        System.out.println("有参数构造器");
     }
 
     public Person(String name, String gender, String email, Integer age, Car car, List<Book> books, Map<String, Object> map, Properties properties) {
@@ -38,7 +37,7 @@ public class Person {
     }
 
     public Person() {
-        System.out.println("无参constructor");
+        System.out.println("Person无参constructor");
     }
 
     public String getName() {

@@ -5,9 +5,10 @@
 <!--正确的为各种属性赋值
 引用类型赋值（引用其他bean）
 集合类型赋值
-util 名称空间创建集合类型bean级联属性赋值
+util 名称空间创建集合类型bean
+级联属性赋值
 -->
-    <bean id="person1" class="ioc.Person">
+    <bean id="person1" class="ioc.bean.Person">
         <!--value="null" value赋值的都是字符串 bean.getName != null-->
         <property name="name" value="null"></property>
         <property name="email" >
@@ -15,26 +16,26 @@ util 名称空间创建集合类型bean级联属性赋值
             <null></null><!--null标签-->
         </property>
         <!--ref 是地址引用-->
-        <property name="car" ref="car">
+        <property name="car" ref="car01">
             <!--引用内部bean 相当于new 一个car-->
-            <!--<bean class = "ioc.Car"></bean>-->
+            <!--<bean class = "ioc.bean.Car"></bean>-->
         </property>
     </bean>
 
-    <bean id = "car" class = "ioc.Car">
+    <bean id = "car01" class = "ioc.bean.Car">
         <property name="name" value="奔驰"></property>
         <property name="color" value="红色"></property>
         <property name="price" value="300000"></property>
     </bean>
 
 
-    <bean id = "person2" class="ioc.Person">
+    <bean id = "person2" class="ioc.bean.Person">
         <!--list 赋值-->
         <property name="books">
             <!--newArrayList-->
             <list>
                 <!--标签里面添加 内部bean 不能获取到 ioc.getBean("book1")-->
-                <bean id="book1" class="ioc.Book">
+                <bean id="book1" class="ioc.bean.Book">
                     <property name="name" value="红楼梦"></property>
                     <property name="author" value="曹雪芹"></property>
                 </bean>
@@ -50,7 +51,7 @@ util 名称空间创建集合类型bean级联属性赋值
                 <entry key="key02" value="18"></entry>
                 <entry key="key03" value-ref="book2"></entry>
                 <entry key="key04">
-                    <bean class="ioc.Car">
+                    <bean class="ioc.bean.Car">
                         <property name="name" value="宝马"></property>
                         <property name="color" value="蓝色"></property>
                         <property name="price" value="800000"></property>
@@ -76,13 +77,43 @@ util 名称空间创建集合类型bean级联属性赋值
             </props>
         </property>
 
-
     </bean>
 
-    <bean id="book2" class="ioc.Book">
+    <bean id="book2" class="ioc.bean.Book">
         <property name="author" value="吴承恩"></property>
         <property name="name" value="西游记"></property>
     </bean>
+
+        <!--级联属性复制 就是属性的属性-->
+
+    <bean  id = "person3" class="ioc.bean.Person">
+        <property name="car" ref="car01"></property>
+        <property name="car.price" value="20000"></property>
+    </bean>
+
+<!--=========================================================================================-->
+    <!--
+        1、 通过继承实现bean配置信息的重用
+        2、 通过abstract属性创建一个模板bean
+        3、 bean之间的依赖
+        4、 测试bean的作用域，分别创建单实例和多实例的bean
+         -->
+
+    <!--abstract="true" 这个bean的实例是抽象的只能被别人继承 不能获取实例-->
+    <bean id="person4" class="ioc.bean.Person" abstract="true">
+        <property name="age" value="20"></property>
+        <property name="email" value="267348@q.com"></property>
+        <property name="gender" value="男"></property>
+        <property name="name" value="张三"></property>
+    </bean>
+
+    <!--parent="person4" 配置信息继承person4 变化的就再修改
+    class="ioc.bean.Person" 也可以删掉-->
+    <bean id="person5" class="ioc.bean.Person" parent="person4">
+        <property name="name" value="李四"></property>
+    </bean>
+
+
 
 
 </beans>

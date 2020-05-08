@@ -1,6 +1,9 @@
 package ioc;
 
 
+import ioc.bean.Book;
+import ioc.bean.Car;
+import ioc.bean.Person;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -11,7 +14,8 @@ import java.util.Map;
 public class PersonTest {
 
 //        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("ioc/config/ioc2.xml");
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("ioc/config/ioc2.xml");
+//        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("ioc/config/ioc2.xml");
+            ApplicationContext applicationContext = new ClassPathXmlApplicationContext("ioc/config/ioc3.xml");
     /*容器构造的时候 类就创建了
     * xml 的property的name是根据setter方法来赋值的
     * set后面的就是name
@@ -27,7 +31,7 @@ public class PersonTest {
     /*根据bean的类型，从IOC容器中获取bean的实例
     applicationContext.getBean(Person.class);
     org.springframework.beans.factory.NoUniqueBeanDefinitionException:
-    No qualifying bean of type 'ioc.Person' available:
+    No qualifying bean of type 'ioc.bean.Person' available:
     expected single matching bean but found 2: person1,person2*/
     @Test
     public void test02(){
@@ -59,7 +63,7 @@ public class PersonTest {
         //默认单例模式 同一个一个car ref是地址引用
         Car car = person.getCar();
         car.setColor("绿色");
-        Car car2 = (Car) applicationContext.getBean("car");
+        Car car2 = (Car) applicationContext.getBean("car01");
         System.out.println(car == car2);
         System.out.println("改の后的绿色car"+person.getCar());
     }
@@ -83,6 +87,38 @@ public class PersonTest {
         Map<String, Object> personMap = person.getMap();
         System.out.println(personMap);
         System.out.println(person.getProperties());
+    }
+
+    /*
+    * 价格都被修改了，级联属性
+    * */
+    @Test
+    public  void  test07(){
+        Person person = (Person) applicationContext.getBean("person3");
+        System.out.println("person的car"+person.getCar());
+        Car car01 = (Car) applicationContext.getBean("car01");
+        System.out.println("容器的car"+car01);
+    }
+
+    /*
+    * org.springframework.beans.factory.BeanIsAbstractException: Error creating bean with name 'person4': Bean definition is abstract*/
+    @Test
+    public void test08(){
+        Person person = (Person) applicationContext.getBean("person5");
+        System.out.println(person);
+
+        /*抽象bean不能获取*/
+        Person person4 = (Person) applicationContext.getBean("person4");
+        System.out.println(person4);
+    }
+
+    /*bean之间的依赖*/
+    @Test
+    public void test09(){
+        System.out.println("---------");
+        Book book = (Book) applicationContext.getBean("book1");
+        Book book2 = (Book) applicationContext.getBean("book1");
+        System.out.println(book == book2);
     }
 
 }
