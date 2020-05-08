@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--正确的为各种属性赋值
+引用类型赋值（引用其他bean）
+集合类型赋值
+util 名称空间创建集合类型bean级联属性赋值
+-->
+    <bean id="person1" class="ioc.Person">
+        <!--value="null" value赋值的都是字符串 bean.getName != null-->
+        <property name="name" value="null"></property>
+        <property name="email" >
+            <!--复杂的赋值都在property标签体-->
+            <null></null><!--null标签-->
+        </property>
+        <!--ref 是地址引用-->
+        <property name="car" ref="car">
+            <!--引用内部bean 相当于new 一个car-->
+            <!--<bean class = "ioc.Car"></bean>-->
+        </property>
+    </bean>
+
+    <bean id = "car" class = "ioc.Car">
+        <property name="name" value="奔驰"></property>
+        <property name="color" value="红色"></property>
+        <property name="price" value="300000"></property>
+    </bean>
+
+
+    <bean id = "person2" class="ioc.Person">
+        <!--list 赋值-->
+        <property name="books">
+            <!--newArrayList-->
+            <list>
+                <!--标签里面添加 内部bean 不能获取到 ioc.getBean("book1")-->
+                <bean id="book1" class="ioc.Book">
+                    <property name="name" value="红楼梦"></property>
+                    <property name="author" value="曹雪芹"></property>
+                </bean>
+                <ref bean="book2"></ref>
+            </list>
+        </property>
+
+        <!--Map<String,Object> map-->
+        <property name="map">
+            <!--相当于newLinkedHashMap-->
+            <map>
+                <entry key="key01" value="张三"></entry>
+                <entry key="key02" value="18"></entry>
+                <entry key="key03" value-ref="book2"></entry>
+                <entry key="key04">
+                    <bean class="ioc.Car">
+                        <property name="name" value="宝马"></property>
+                        <property name="color" value="蓝色"></property>
+                        <property name="price" value="800000"></property>
+                    </bean>
+                </entry>
+                <entry key="key05">
+                    <map></map>
+                </entry>
+                <entry key="key06">
+                    <value>李四</value>
+                </entry>
+            </map>
+        </property>
+
+
+        <!--Properties properties-->
+        <property name="properties">
+            <!--Properties properties = new Properties(); 所有的k= v都是string-->
+            <props>
+                <!--都是字符串 值直接写在标签体-->
+                <prop key="username"> root</prop>
+                <prop key="password"> 123456</prop>
+            </props>
+        </property>
+
+
+    </bean>
+
+    <bean id="book2" class="ioc.Book">
+        <property name="author" value="吴承恩"></property>
+        <property name="name" value="西游记"></property>
+    </bean>
+
+
+</beans>

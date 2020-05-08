@@ -5,15 +5,19 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.List;
+import java.util.Map;
+
 public class PersonTest {
 
+//        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("ioc/config/ioc2.xml");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("ioc/config/ioc2.xml");
     /*容器构造的时候 类就创建了
     * xml 的property的name是根据setter方法来赋值的
     * set后面的就是name
     * */
     @Test
     public void test01(){
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("ioc/ioc.xml");
         System.out.println("----------");
         Person person1 = (Person) applicationContext.getBean("person1");
         System.out.println(person1);
@@ -27,7 +31,6 @@ public class PersonTest {
     expected single matching bean but found 2: person1,person2*/
     @Test
     public void test02(){
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("ioc/ioc.xml");
         Person person = applicationContext.getBean("person2",Person.class);
         System.out.println(person);
     }
@@ -37,10 +40,49 @@ public class PersonTest {
     * */
     @Test
     public void test03(){
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("ioc/ioc.xml");
-        Person person = applicationContext.getBean("person3",Person.class);
+        Person person3 = applicationContext.getBean("person3",Person.class);
+        System.out.println(person3);
+
+        Person person = applicationContext.getBean("person4",Person.class);
         System.out.println(person);
     }
 
+
+    @Test
+    public void test04(){
+        Person person = (Person) applicationContext.getBean("person1");
+        System.out.println(person.getName() == null);
+        System.out.println(person.getEmail() == null);
+
+        System.out.println("修改之前"+person.getCar());
+
+        //默认单例模式 同一个一个car ref是地址引用
+        Car car = person.getCar();
+        car.setColor("绿色");
+        Car car2 = (Car) applicationContext.getBean("car");
+        System.out.println(car == car2);
+        System.out.println("改の后的绿色car"+person.getCar());
+    }
+
+    @Test
+    public void test05(){
+        Person person = (Person) applicationContext.getBean("person2");
+        List<Book> bookList = person.getBooks();
+        for (Book b:bookList) {
+            System.out.println(b);
+        }
+
+        /*org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'book1' available*/
+//        Book book1 = (Book) applicationContext.getBean("book1");
+//        System.out.println(book1);
+    }
+
+    @Test
+    public void test06(){
+        Person person = (Person) applicationContext.getBean("person2");
+        Map<String, Object> personMap = person.getMap();
+        System.out.println(personMap);
+        System.out.println(person.getProperties());
+    }
 
 }
