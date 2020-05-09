@@ -133,4 +133,15 @@ public class PersonTest {
         System.out.println(airPlane2);
     }
 
+    /**
+     * ioc容器启动的时候不会创建实例， 只有在getBean的时候
+     */
+    @Test
+    public void  test11(){
+        Object myFactory = applicationContext.getBean("myfactory");
+        Object myFactory2 = applicationContext.getBean("myfactory");
+        System.out.println(myFactory);
+        System.out.println(myFactory2);
+
+    }
 }

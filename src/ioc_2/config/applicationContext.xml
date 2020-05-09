@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--创建带有生命周期方法的bean
+    生命周期：bean的创建到销毁
+    ioc容器中注册的bean：
+        1. 单例bean 容器启动的时候bean就会被创建
+        2. 多例bean 在获取的时候创建
+    init-method 初始化方法
+    destroy-method 小销毁方法 The method must have no arguments, but may throw any exception.
+    -->
+    <bean id="book01" class="ioc_2.bean.Book" init-method="iniMethod" destroy-method="destoryMethod"></bean>
+
+
+
+    <!--测试bean的后置处理器
+    spring有一个接口 BeanPostProcessor， 可以在初始化前后调用
+    -->
+    <bean id="beanPost" class="ioc_2.bean.BeanPostProcessorImpl"></bean>
+    <bean id="car" class="ioc.bean.Car"></bean>
+</beans>

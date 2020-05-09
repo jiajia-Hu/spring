@@ -6,6 +6,7 @@
         <fileset id="fileset" name="Ioc" removed="false">
           <file>file://$MODULE_DIR$/src/ioc/ioc.xml</file>
           <file>file://$MODULE_DIR$/src/ioc/config/ioc2.xml</file>
+          <file>file://$MODULE_DIR$/src/ioc_2/config/applicationContext02.xml</file>
         </fileset>
       </configuration>
     </facet>
@@ -44,5 +45,8 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="c3p0:c3p0:0.9.1.2" level="project" />
+    <orderEntry type="library" name="mysql:mysql-connector-java:8.0.20" level="project" />
+    <orderEntry type="library" name="org.springframework:spring-aop:4.1.5.RELEASE" level="project" />
   </component>
 </module>

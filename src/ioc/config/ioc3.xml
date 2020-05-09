@@ -50,4 +50,9 @@ bean之间的依赖，只是改变顺序-->
         <constructor-arg value="李四机长"></constructor-arg>
     </bean>
 
+    <!--FactoryBean (是Spring规定的一个接口)；
+                    只要是这个接口的实现类， spring都认为是一个工厂
+                    ioc容器启动的时候不会创建实例， 只有在getBean的时候-->
+    <bean id="myfactory" class="ioc.factory.MyFactoryImpl"></bean>
+
 </beans>
